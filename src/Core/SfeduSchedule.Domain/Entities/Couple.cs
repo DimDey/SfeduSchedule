@@ -4,6 +4,7 @@ namespace SfeduSchedule.Domain.Entities
 {
     public class Couple : BaseEntity
     {
+        public Guid DayId { get; set; }
         public Day Day { get; set; }
         public int Number { get; set; }
         public string Name { get; set; }

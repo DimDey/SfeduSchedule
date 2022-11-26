@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SfeduSchedule.Persistence",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{27F3A266-22F6-44EB-8877-960979066A46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfeduSchedule.Domain", "src\Core\SfeduSchedule.Domain\SfeduSchedule.Domain.csproj", "{D99F37B4-1CAB-4FB7-BA83-7076D1F74C21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SfeduSchedule.Domain", "src\Core\SfeduSchedule.Domain\SfeduSchedule.Domain.csproj", "{D99F37B4-1CAB-4FB7-BA83-7076D1F74C21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SfeduSchedule.Application", "src\Core\SfeduSchedule.Application\SfeduSchedule.Application.csproj", "{6AC6CC9E-F684-4359-ABFB-4FA2140EA45D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SfeduSchedule.Application", "src\Core\SfeduSchedule.Application\SfeduSchedule.Application.csproj", "{6AC6CC9E-F684-4359-ABFB-4FA2140EA45D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

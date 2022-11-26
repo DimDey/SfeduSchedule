@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SfeduSchedule.Domain.Entities;
+using SfeduSchedule.Persistence.EntityConfiguration.Base;
 
 namespace SfeduSchedule.Persistence.EntityConfiguration
 {
-    public class CoupleConfiguration : BaseEntityConfiguration<Couple>
+    public class CoupleEntityConfiguration : BaseEntityConfiguration<Couple>
     {
-        protected override void BuildConfig(EntityTypeBuilder<Couple> builder)
+        public override void Configure(EntityTypeBuilder<Couple> builder)
         {
-            builder.HasOne(x => x.Day)
-                .WithMany(x => x.Couples);
+            base.Configure(builder);
 
             builder.Property(x => x.Number)
                 .IsRequired();
@@ -34,12 +34,6 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
 
             builder.Property(x => x.OnEven);
             builder.Property(x => x.SubGroup);
-
-        }
-
-        protected override string GetTableName()
-        {
-            return "DayCouples";
         }
     }
 }

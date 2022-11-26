@@ -7,11 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\SfeduSchedule.Application\SfeduSchedule.Application.csproj" />
+    <ProjectReference Include="..\..\Core\SfeduSchedule.Domain\SfeduSchedule.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SfeduSchedule.Persistence\SfeduSchedule.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
