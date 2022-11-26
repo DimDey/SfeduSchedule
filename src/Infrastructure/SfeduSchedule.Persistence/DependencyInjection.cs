@@ -7,7 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using SfeduSchedule.Application.Interfaces;
+using SfeduSchedule.Application.Interfaces.Repository;
+using SfeduSchedule.Domain.Entities;
 using SfeduSchedule.Persistence.Context;
+using SfeduSchedule.Persistence.Repository;
 
 namespace SfeduSchedule.Persistence
 {
@@ -22,6 +25,8 @@ namespace SfeduSchedule.Persistence
             });
             services.AddScoped<IApplicationContext>(provider =>
                 provider.GetService<ApplicationContext>());
+            
+            services.AddScoped<IRepository<Group>, GroupRepository>();
 
             return services;
         }

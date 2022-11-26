@@ -6,7 +6,7 @@ namespace SfeduSchedule.Domain.Entities
     {
         public string Name { get; set; }
         public Guid FacultyId { get; set; }
-        public Faculty Faculty { get; set; }
-        public IEnumerable<Schedule> Schedules { get; set; }
+        public virtual Faculty Faculty { get; set; }
+        public virtual IEnumerable<Schedule> Schedules { get; set; }
     }
 }

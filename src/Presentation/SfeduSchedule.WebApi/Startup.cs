@@ -5,12 +5,14 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using SfeduSchedule.Application;
 using SfeduSchedule.Application.Common.Mappings;
 using SfeduSchedule.Application.Interfaces;
 using SfeduSchedule.Application.Interfaces.Repository;
 using SfeduSchedule.Domain.Entities;
 using SfeduSchedule.Persistence;
 using SfeduSchedule.Persistence.Repository;
+using SfeduSchedule.WebApi.Middleware;
 
 namespace SfeduSchedule.WebApi
 {
@@ -24,17 +26,15 @@ namespace SfeduSchedule.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddPersistence(configuration);
-
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
                 config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
             });
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddScoped<IRepository<Group>, GroupRepository>();
             
-
+            services.AddPersistence(configuration);
+            services.AddApplication();
+            
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
@@ -48,6 +48,7 @@ namespace SfeduSchedule.WebApi
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExpectionHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
