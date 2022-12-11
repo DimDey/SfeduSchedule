@@ -18,8 +18,9 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
             base.Configure(builder);
             builder.Property(x => x.Name).IsRequired();
 
-            builder.HasMany(x => x.Schedules)
-                .WithOne();
+            builder.HasOne(x => x.Schedule)
+                .WithOne(x => x.Entity)
+                .HasForeignKey<Schedule>(x => x.EntityId);
         }
     }
 }

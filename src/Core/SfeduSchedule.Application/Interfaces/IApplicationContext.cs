@@ -13,5 +13,6 @@ namespace SfeduSchedule.Application.Interfaces
         public DbSet<Couple> Couples { get; set; }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
     }
 }

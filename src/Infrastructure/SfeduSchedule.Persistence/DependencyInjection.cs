@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
 using SfeduSchedule.Application.Interfaces;
 using SfeduSchedule.Application.Interfaces.Repository;
+using SfeduSchedule.Application.Interfaces.Repository.Base;
 using SfeduSchedule.Domain.Entities;
 using SfeduSchedule.Persistence.Context;
-using SfeduSchedule.Persistence.Repository;
+using SfeduSchedule.Persistence.Repositories;
+using SfeduSchedule.Persistence.Repositories.Base;
 
 namespace SfeduSchedule.Persistence
 {
@@ -26,7 +21,9 @@ namespace SfeduSchedule.Persistence
             services.AddScoped<IApplicationContext>(provider =>
                 provider.GetService<ApplicationContext>());
             
-            services.AddScoped<IRepository<Group>, GroupRepository>();
+            services.AddScoped(typeof(IGroupRepository), typeof(GroupRepository));
+            services.AddScoped(typeof(IInsituteRepository), typeof(InstituteRepository));
+            services.AddScoped(typeof(IScheduleRepository), typeof(ScheduleRepository));
 
             return services;
         }

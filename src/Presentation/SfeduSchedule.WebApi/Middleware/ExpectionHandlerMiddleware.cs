@@ -45,7 +45,7 @@ public class ExpectionHandlerMiddleware
         context.Response.StatusCode = (int)code;
         if (result == string.Empty)
         {
-            result = JsonSerializer.Serialize(new { errpr = exception.Message });
+            result = JsonSerializer.Serialize(new { message = exception.Message });
         }
         
         return context.Response.WriteAsync(result);
