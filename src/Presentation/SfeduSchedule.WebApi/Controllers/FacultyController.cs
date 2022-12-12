@@ -4,11 +4,7 @@ using SfeduSchedule.Application.Features.Faculties.Commands.CreateFaculty;
 using SfeduSchedule.Application.Features.Faculties.Commands.DeleteFaculty;
 using SfeduSchedule.Application.Features.Faculties.Commands.UpdateFaculty;
 using SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFaculties;
-using SfeduSchedule.Application.Features.Institutes.Commands.CreateInstitute;
-using SfeduSchedule.Application.Features.Institutes.Commands.DeleteInstitute;
-using SfeduSchedule.Application.Features.Institutes.Commands.UpdateInstitute;
 using SfeduSchedule.Application.Features.Institutes.Queries.GetInsituteList;
-using SfeduSchedule.WebApi.Models;
 
 namespace SfeduSchedule.WebApi.Controllers;
 
