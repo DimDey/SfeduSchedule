@@ -16,14 +16,6 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
         {
             base.Configure(builder);
             builder.Property(x => x.Name).IsRequired();
-            builder.HasOne(x => x.Institute)
-                .WithMany(x => x.Faculties)
-                .HasForeignKey(x => x.InstituteId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(x => x.Groups)
-                .WithOne(x => x.Faculty)
-                .HasForeignKey(x => x.FacultyId);
         }
     }
 }

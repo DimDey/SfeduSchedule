@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SfeduSchedule.Domain.Entities;
 using SfeduSchedule.Persistence.EntityConfiguration.Base;
@@ -15,6 +16,11 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
         {
             base.Configure(builder);
             builder.Property(x => x.Name).IsRequired();
+
+            builder.HasMany(x => x.Faculties)
+                .WithOne(x => x.Institute)
+                .HasForeignKey(x => x.InstituteId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

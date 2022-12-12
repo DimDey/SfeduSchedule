@@ -24,6 +24,7 @@ namespace SfeduSchedule.Persistence
             services.AddScoped(typeof(IGroupRepository), typeof(GroupRepository));
             services.AddScoped(typeof(IInsituteRepository), typeof(InstituteRepository));
             services.AddScoped(typeof(IScheduleRepository), typeof(ScheduleRepository));
+            services.AddScoped(typeof(IFacultyRepository), typeof(FacultyRepository));
 
             return services;
         }

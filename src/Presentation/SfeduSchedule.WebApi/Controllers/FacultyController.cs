@@ -1,5 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SfeduSchedule.Application.Features.Faculties.Commands.CreateFaculty;
+using SfeduSchedule.Application.Features.Faculties.Commands.DeleteFaculty;
+using SfeduSchedule.Application.Features.Faculties.Commands.UpdateFaculty;
+using SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFaculties;
 using SfeduSchedule.Application.Features.Institutes.Commands.CreateInstitute;
 using SfeduSchedule.Application.Features.Institutes.Commands.DeleteInstitute;
 using SfeduSchedule.Application.Features.Institutes.Commands.UpdateInstitute;
@@ -8,19 +12,23 @@ using SfeduSchedule.WebApi.Models;
 
 namespace SfeduSchedule.WebApi.Controllers;
 
-public class InstituteController : BaseController
+public class FacultyController : BaseController
 {
     private readonly IMapper _mapper;
 
-    public InstituteController(IMapper mapper)
+    public FacultyController(IMapper mapper)
     {
         _mapper = mapper;
     }
-
+    
+    [Route("Insitute/{id}")]
     [HttpGet]
-    public async Task<ActionResult<InstituteListVm>> Get()
+    public async Task<ActionResult<InstituteListVm>> Get(Guid id)
     {
-        var query = new GetInstituteListQuery();
+        var query = new GetInstituteFacultiesCommand()
+        {
+            InstituteId = id
+        };
 
         var result = await Mediator.Send(query);
 
@@ -28,9 +36,9 @@ public class InstituteController : BaseController
     }
 
     [HttpPost]
-    public async Task<ActionResult<Guid>> Create([FromBody] CreateInstituteDto model)
+    public async Task<ActionResult<Guid>> Create([FromBody] CreateFacultyDto model)
     {
-        var command = _mapper.Map<CreateInstituteCommand>(model);
+        var command = _mapper.Map<CreateFacultyCommand>(model);
 
         var result = await Mediator.Send(command);
 
@@ -38,10 +46,10 @@ public class InstituteController : BaseController
     }
 
     [HttpPut]
-    public async Task<ActionResult> Update([FromBody] UpdateInstituteDto model)
+    public async Task<ActionResult> Update([FromBody] UpdateFacultyDto model)
     {
-        var command = _mapper.Map<UpdateInstituteCommand>(model);
-
+        var command = _mapper.Map<UpdateFacultyCommand>(model);
+    
         var result = await Mediator.Send(command);
         return NoContent();
     }
@@ -50,7 +58,7 @@ public class InstituteController : BaseController
     [HttpDelete]
     public async Task<ActionResult> Delete(Guid id)
     {
-        var command = new DeleteInstituteCommand()
+        var command = new DeleteFacultyCommand()
         {
             Id = id
         };

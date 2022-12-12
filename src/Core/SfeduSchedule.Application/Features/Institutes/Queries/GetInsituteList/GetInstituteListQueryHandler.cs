@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SfeduSchedule.Application.Interfaces.Repository;
 
-namespace SfeduSchedule.Application.Features.Institutes.Queiries.GetInsituteList;
+namespace SfeduSchedule.Application.Features.Institutes.Queries.GetInsituteList;
 
 public class GetInstituteListQueryHandler : IRequestHandler<GetInstituteListQuery, InstituteListVm>
 {
@@ -20,7 +20,7 @@ public class GetInstituteListQueryHandler : IRequestHandler<GetInstituteListQuer
     public async Task<InstituteListVm> Handle(GetInstituteListQuery request, CancellationToken cancellationToken)
     {
         var instituteList = await _insituteRepository.ListAllQuery()
-            .ProjectTo<InstituteLookupDTO>(_mapper.ConfigurationProvider)
+            .ProjectTo<InstituteLookupDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
 
         return new InstituteListVm() { Institutes = instituteList };

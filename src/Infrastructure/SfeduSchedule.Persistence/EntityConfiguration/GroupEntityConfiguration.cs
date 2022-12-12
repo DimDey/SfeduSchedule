@@ -21,6 +21,11 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
             builder.HasOne(x => x.Schedule)
                 .WithOne(x => x.Entity)
                 .HasForeignKey<Schedule>(x => x.EntityId);
+
+            builder.HasOne(x => x.Faculty)
+                .WithMany(x => x.Groups)
+                .HasForeignKey(x => x.FacultyId)
+                .HasPrincipalKey(x => x.Id);
         }
     }
 }

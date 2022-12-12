@@ -4,7 +4,7 @@ using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Application.Features.Groups.Queries.GetFacultyGroups;
 
-public class GroupLookupDTO : IMapWith<Group>
+public class GroupLookupDto : IMapWith<Group>
 {
     public Guid Id { get; set; }
     public Guid FacultyId { get; set; }
@@ -14,6 +14,6 @@ public class GroupLookupDTO : IMapWith<Group>
 
     public void Mapping(Profile profile)
     {
-        profile.CreateMap<GroupLookupDTO, Group>();
+        profile.CreateMap<GroupLookupDto, Group>();
     }
 }

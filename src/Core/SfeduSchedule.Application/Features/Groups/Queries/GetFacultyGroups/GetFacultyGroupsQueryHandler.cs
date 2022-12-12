@@ -20,7 +20,7 @@ namespace SfeduSchedule.Application.Features.Groups.Queries.GetFacultyGroups;
      public async Task<GroupsVm> Handle(GetFacultyGroupsQuery request, CancellationToken cancellationToken)
      {
          var groupsQuery = await _groupRepository.FindWhere(x => x.FacultyId == request.FacultyId)
-             .ProjectTo<GroupLookupDTO>(_mapper.ConfigurationProvider)
+             .ProjectTo<GroupLookupDto>(_mapper.ConfigurationProvider)
              .ToListAsync(cancellationToken);
 
          return new GroupsVm { Groups = groupsQuery };
