@@ -1,24 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using SfeduSchedule.Application;
+using SfeduSchedule.Application.Common.Mappings;
+using SfeduSchedule.Application.Interfaces;
+using SfeduSchedule.Persistence;
+using SfeduSchedule.WebApi.Middleware;
 
 namespace SfeduSchedule.WebApi
 {
     public class Startup
     {
-        public IConfiguration configuration { get; }
-        public Startup(IConfiguration configuration)
+        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration config)
         {
-            configuration = configuration;
+            Configuration = config;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddPersistence(Configuration);
+            services.AddApplication();
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+                config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
+            });
+            
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -29,6 +39,7 @@ namespace SfeduSchedule.WebApi
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExpectionHandlerMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

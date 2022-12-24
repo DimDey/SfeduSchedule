@@ -6,7 +6,8 @@ namespace SfeduSchedule.Domain.Entities
 {
     public class Schedule : BaseEntity
     {
-        public Group Group { get; set; }
-        public ICollection<Day> Days { get; set; }
+        public Guid EntityId { get; set; }
+        public virtual Group Entity { get; set; }
+        public virtual ICollection<Day> Days { get; set; }
     }
 }
