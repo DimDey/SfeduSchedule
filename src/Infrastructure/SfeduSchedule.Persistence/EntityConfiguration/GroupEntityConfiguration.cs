@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SfeduSchedule.Domain.Entities;
 using SfeduSchedule.Persistence.EntityConfiguration.Base;
 
@@ -13,14 +14,8 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
 
 			builder.HasMany(x => x.Events)
 				.WithOne(x => x.Group)
-				.HasForeignKey(x => x.GroupId);
-
-			builder.HasOne(x => x.Faculty)
-				.WithMany(x => x.Groups)
-				.HasForeignKey(x => x.FacultyId)
-				.HasPrincipalKey(x => x.Id);
-
-
+				.HasForeignKey(x => x.GroupId)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

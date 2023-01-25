@@ -51,7 +51,7 @@ namespace SfeduSchedule.WebApi.Controllers
 			var command = _mapper.Map<CreateGroupCommand>(model);
 
 			var result = await Mediator.Send(command);
-			return Ok();
+			return Ok(result);
 		}
 
 

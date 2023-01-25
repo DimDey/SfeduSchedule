@@ -19,7 +19,8 @@ public class CreateGroupCommandHandler : IRequestHandler<CreateGroupCommand, Gui
 		var group = new Group()
 		{
 			Id = Guid.NewGuid(),
-			Name = request.Name
+			Name = request.Name,
+			FacultyId = request.FacultyId
 		};
 
 		await _groupRepository.AddAsync(group, cancellationToken);
