@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using SfeduSchedule.Application.Common.Mappings;
 using SfeduSchedule.Domain.Entities;
 
@@ -25,5 +26,10 @@ namespace SfeduSchedule.Application.Features.DayEvents.Commands.CreateEvent
 		public bool? OnEven { get; set; }
 
 		public int? SubGroup { get; set; }
+
+		public void Mapping(Profile profile)
+		{
+			profile.CreateMap<CreateEventCommand, DayEvent>();
+		}
 	}
 }

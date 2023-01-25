@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Newtonsoft.Json.Converters;
 using SfeduSchedule.Application;
 using SfeduSchedule.Application.Common.Mappings;
 using SfeduSchedule.Application.Interfaces;
@@ -27,12 +28,16 @@ namespace SfeduSchedule.WebApi
 				config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
 			});
 
-			services.AddControllers();
+			services.AddControllers().AddNewtonsoftJson(opts =>
+			{
+				opts.SerializerSettings.Converters.Add(new StringEnumConverter());
+			}); ;
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen(x =>
 			{
 				x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
 			});
+			services.AddSwaggerGenNewtonsoftSupport();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
