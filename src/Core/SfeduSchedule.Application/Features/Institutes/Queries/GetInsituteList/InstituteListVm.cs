@@ -1,6 +1,6 @@
 namespace SfeduSchedule.Application.Features.Institutes.Queries.GetInsituteList;
 
-public class InstituteListVm 
+public class InstituteListVm
 {
-    public IList<InstituteLookupDto> Institutes { get; set; }
+	public IList<InstituteLookupDto> Institutes { get; set; }
 }

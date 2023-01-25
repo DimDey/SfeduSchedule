@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SfeduSchedule.Application.Features.Groups.Commands.CreateGroup;
 using SfeduSchedule.Application.Features.Groups.Commands.DeleteGroup;
@@ -8,75 +8,86 @@ using SfeduSchedule.WebApi.Models;
 
 namespace SfeduSchedule.WebApi.Controllers
 {
-    public class GroupController : BaseController
-    {
-        private readonly IMapper _mapper;
+	/// <summary>
+	/// Методы группы факультета
+	/// </summary>
+	public class GroupController : BaseController
+	{
+		private readonly IMapper _mapper;
 
-        public GroupController(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-        
-        [Route("{id}")]
-        [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<GroupDetailsVm>> Get(Guid id)
-        {
-            var query = new GetGroupDetailsQuery()
-            {
-                Id = id
-            };
+		public GroupController(IMapper mapper)
+		{
+			_mapper = mapper;
+		}
 
-            var result = await Mediator.Send(query);
+		/// <summary>
+		/// Получение информации о группе
+		/// </summary>
+		/// <param name="id">GUID группы</param>
+		/// <returns></returns>
+		[Route("{id}")]
+		[HttpGet]
+		public async Task<ActionResult<GroupDetailsVm>> Get(Guid id)
+		{
+			var query = new GetGroupDetailsQuery()
+			{
+				Id = id
+			};
 
-            return Ok(result);
-        }
+			var result = await Mediator.Send(query);
 
-        
-        [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateGroupDto model)
-        {
-            var command = _mapper.Map<CreateGroupCommand>(model);
+			return Ok(result);
+		}
 
-            var result = await Mediator.Send(command);
-            return Ok();
-        }
 
-        [HttpPut]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Update([FromBody] UpdateGroupDto model)
-        {
-            var command = _mapper.Map<UpdateGroupCommand>(model);
-            await Mediator.Send(command);
-            return NoContent();
-        }
+		/// <summary>
+		/// Создание новой группы в факультете
+		/// </summary>
+		/// <param name="model">Модель создания группы</param>
+		/// <returns></returns>
+		[HttpPost]
+		public async Task<ActionResult<Guid>> Create([FromBody] CreateGroupDto model)
+		{
+			var command = _mapper.Map<CreateGroupCommand>(model);
 
-        [Route("{id}")]
-        [HttpDelete]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Delete(Guid id)
-        {
-            var command = new DeleteGroupCommand()
-            {
-                Id = id
-            };
-            await Mediator.Send(command);
-            
-            return NoContent();
-        }
-        
-    }
+			var result = await Mediator.Send(command);
+			return Ok();
+		}
+
+
+		/// <summary>
+		/// Обновление сущности группы факультета 
+		/// </summary>
+		/// <param name="model">Модель обновления группы</param>
+		/// <remarks>Если необходимо обновить только одно поле из модели, то отправляем только это поле и GUID.</remarks>
+		/// <returns></returns>
+		[HttpPut]
+		public async Task<ActionResult> Update([FromBody] UpdateGroupDto model)
+		{
+			var command = _mapper.Map<UpdateGroupCommand>(model);
+			await Mediator.Send(command);
+			return Ok();
+		}
+
+
+		/// <summary>
+		/// Удаление группы факультета.
+		/// </summary>
+		/// <param name="id">GUID группы</param>
+		/// <returns></returns>
+		[Route("{id}")]
+		[HttpDelete]
+		public async Task<ActionResult> Delete(Guid id)
+		{
+			var command = new DeleteGroupCommand()
+			{
+				Id = id
+			};
+			await Mediator.Send(command);
+
+			return Ok();
+		}
+
+	}
 }
 

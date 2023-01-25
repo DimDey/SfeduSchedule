@@ -7,7 +7,7 @@ using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Persistence.Repositories.Base;
 
-public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
 {
     private readonly IApplicationContext _applicationContext;
     private readonly DbSet<TEntity> _entitySet;

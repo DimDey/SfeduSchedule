@@ -4,5 +4,5 @@ namespace SfeduSchedule.Application.Features.Groups.Queries.GetGroupDetails;
 
 public class GetGroupDetailsQuery : IRequest<GroupDetailsVm>
 {
-    public Guid Id { get; set; }
+	public Guid Id { get; set; }
 }

@@ -1,23 +1,29 @@
 using MediatR;
-using SfeduSchedule.Application.Interfaces.Repository;
+using SfeduSchedule.Application.Common.Exceptions;
+using SfeduSchedule.Application.Interfaces.Repository.Base;
+using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Application.Features.Faculties.Commands.DeleteFaculty;
 
 public class DeleteFacultyCommandHandler : IRequestHandler<DeleteFacultyCommand, Unit>
 {
-    private readonly IFacultyRepository _facultyRepository;
+	private readonly IRepository<Faculty> _facultyRepository;
 
-    public DeleteFacultyCommandHandler(IFacultyRepository repository)
-    {
-        _facultyRepository = repository;
-    }
-    
-    public async Task<Unit> Handle(DeleteFacultyCommand request, CancellationToken cancellationToken)
-    {
-        var entity = await _facultyRepository.GetByGuIdAsync(request.Id);
+	public DeleteFacultyCommandHandler(IRepository<Faculty> repository)
+	{
+		_facultyRepository = repository;
+	}
 
-        await _facultyRepository.DeleteAsync(entity);
+	public async Task<Unit> Handle(DeleteFacultyCommand request, CancellationToken cancellationToken)
+	{
+		var entity = await _facultyRepository.GetByGuIdAsync(request.Id);
+		if (entity == null || entity.Id != request.Id)
+		{
+			throw new NotFoundException(nameof(Faculty), request.Id);
+		}
 
-        return Unit.Value;
-    }
+		await _facultyRepository.DeleteAsync(entity);
+
+		return Unit.Value;
+	}
 }

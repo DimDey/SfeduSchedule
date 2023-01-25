@@ -1,24 +1,31 @@
 using MediatR;
-using SfeduSchedule.Application.Interfaces.Repository;
+using SfeduSchedule.Application.Common.Exceptions;
+using SfeduSchedule.Application.Interfaces.Repository.Base;
+using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Application.Features.Faculties.Commands.UpdateFaculty;
 
 public class UpdateFacultyCommandHandler : IRequestHandler<UpdateFacultyCommand>
 {
-    private readonly IFacultyRepository _facultyRepository;
+	private readonly IRepository<Faculty> _facultyRepository;
 
-    public UpdateFacultyCommandHandler(IFacultyRepository repository)
-    {
-        _facultyRepository = repository;
-    }
-    
-    public async Task<Unit> Handle(UpdateFacultyCommand request, CancellationToken cancellationToken)
-    {
-        var entity = await _facultyRepository.GetByGuIdAsync(request.Id);
+	public UpdateFacultyCommandHandler(IRepository<Faculty> repository)
+	{
+		_facultyRepository = repository;
+	}
 
-        entity.Name = request.Name;
+	public async Task<Unit> Handle(UpdateFacultyCommand request, CancellationToken cancellationToken)
+	{
+		var entity = await _facultyRepository.GetByGuIdAsync(request.Id);
+		if(entity == null || entity.Id != request.Id) 
+		{
+			throw new NotFoundException(nameof(Faculty), request.Id);
+		}
 
-        await _facultyRepository.UpdateAsync(entity);
-        return Unit.Value;
-    }
+		if (!string.IsNullOrEmpty(request.Name))
+			entity.Name = request.Name;
+
+		await _facultyRepository.UpdateAsync(entity);
+		return Unit.Value;
+	}
 }

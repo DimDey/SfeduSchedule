@@ -4,12 +4,9 @@ namespace SfeduSchedule.Application.Features.Institutes.Commands.UpdateInstitute
 
 public class UpdateInstituteCommandValidator : AbstractValidator<UpdateInstituteCommand>
 {
-    public UpdateInstituteCommandValidator()
-    {
-        RuleFor(command =>
-            command.Id).NotEqual(Guid.Empty);
-
-        RuleFor(command =>
-            command.Name).NotEqual(String.Empty);
-    }
+	public UpdateInstituteCommandValidator()
+	{
+		RuleFor(command =>
+			command.Id).NotEqual(Guid.Empty);
+	}
 }

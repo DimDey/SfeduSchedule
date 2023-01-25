@@ -1,30 +1,30 @@
 using MediatR;
-using SfeduSchedule.Application.Interfaces.Repository;
+using SfeduSchedule.Application.Interfaces.Repository.Base;
 using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Application.Features.Faculties.Commands.CreateFaculty;
 
 public class CreateFacultyCommandHandler : IRequestHandler<CreateFacultyCommand, Guid>
 {
-    private readonly IFacultyRepository _facultyRepository;
+	private readonly IRepository<Faculty> _facultyRepository;
 
-    public CreateFacultyCommandHandler(IFacultyRepository repository)
-    {
-        _facultyRepository = repository;
-    }
-    
-    public async Task<Guid> Handle(CreateFacultyCommand request, CancellationToken cancellationToken)
-    {
-        var faculty = new Faculty()
-        {
-            Id = Guid.NewGuid(),
-            Name = request.Name,
-            Groups = new List<Group>(),
-            InstituteId = request.InstituteId
-        };
+	public CreateFacultyCommandHandler(IRepository<Faculty> repository)
+	{
+		_facultyRepository = repository;
+	}
 
-        await _facultyRepository.AddAsync(faculty);
+	public async Task<Guid> Handle(CreateFacultyCommand request, CancellationToken cancellationToken)
+	{
+		var faculty = new Faculty()
+		{
+			Id = Guid.NewGuid(),
+			Name = request.Name,
+			Groups = new List<Group>(),
+			InstituteId = request.InstituteId
+		};
 
-        return faculty.Id;
-    }
+		await _facultyRepository.AddAsync(faculty);
+
+		return faculty.Id;
+	}
 }

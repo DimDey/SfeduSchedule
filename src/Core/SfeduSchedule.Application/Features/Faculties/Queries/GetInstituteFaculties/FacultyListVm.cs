@@ -2,5 +2,5 @@ namespace SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFacul
 
 public class FacultyListVm
 {
-    public IList<FacultyLookupDto> Faculties { get; set; }
+	public IList<FacultyLookupDto> Faculties { get; set; }
 }

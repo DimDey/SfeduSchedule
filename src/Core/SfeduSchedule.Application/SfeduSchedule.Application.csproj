@@ -21,4 +21,10 @@
     <ProjectReference Include="..\SfeduSchedule.Domain\SfeduSchedule.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\DayEvents\Commands\DeleteEvent\" />
+    <Folder Include="Features\DayEvents\Commands\UpdateEvent\" />
+    <Folder Include="Features\DayEvents\Queries\" />
+  </ItemGroup>
+
 </Project>

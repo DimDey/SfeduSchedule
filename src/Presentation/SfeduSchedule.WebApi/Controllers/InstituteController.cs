@@ -1,4 +1,4 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SfeduSchedule.Application.Features.Institutes.Commands.CreateInstitute;
 using SfeduSchedule.Application.Features.Institutes.Commands.DeleteInstitute;
@@ -8,55 +8,81 @@ using SfeduSchedule.WebApi.Models;
 
 namespace SfeduSchedule.WebApi.Controllers;
 
+/// <summary>
+/// Методы института
+/// </summary>
 public class InstituteController : BaseController
 {
-    private readonly IMapper _mapper;
+	private readonly IMapper _mapper;
 
-    public InstituteController(IMapper mapper)
-    {
-        _mapper = mapper;
-    }
+	public InstituteController(IMapper mapper)
+	{
+		_mapper = mapper;
+	}
 
-    [HttpGet]
-    public async Task<ActionResult<InstituteListVm>> Get()
-    {
-        var query = new GetInstituteListQuery();
 
-        var result = await Mediator.Send(query);
+	/// <summary>
+	/// Получение списка институтов
+	/// </summary>
+	/// <returns></returns>
+	[HttpGet]
+	public async Task<ActionResult<InstituteListVm>> Get()
+	{
+		var query = new GetInstituteListQuery();
 
-        return Ok(result);
-    }
+		var result = await Mediator.Send(query);
 
-    [HttpPost]
-    public async Task<ActionResult<Guid>> Create([FromBody] CreateInstituteDto model)
-    {
-        var command = _mapper.Map<CreateInstituteCommand>(model);
+		return Ok(result);
+	}
 
-        var result = await Mediator.Send(command);
 
-        return Ok(result);
-    }
+	/// <summary>
+	/// Создание сущности института
+	/// </summary>
+	/// <param name="model">Модель создания института</param>
+	/// <returns></returns>
+	[HttpPost]
+	public async Task<ActionResult<Guid>> Create([FromBody] CreateInstituteDto model)
+	{
+		var command = _mapper.Map<CreateInstituteCommand>(model);
 
-    [HttpPut]
-    public async Task<ActionResult> Update([FromBody] UpdateInstituteDto model)
-    {
-        var command = _mapper.Map<UpdateInstituteCommand>(model);
+		var result = await Mediator.Send(command);
 
-        var result = await Mediator.Send(command);
-        return NoContent();
-    }
+		return Ok(result);
+	}
 
-    [Route("{id}")]
-    [HttpDelete]
-    public async Task<ActionResult> Delete(Guid id)
-    {
-        var command = new DeleteInstituteCommand()
-        {
-            Id = id
-        };
 
-        await Mediator.Send(command);
+	/// <summary>
+	/// Обновление института
+	/// </summary>
+	/// <param name="model">Модель обновления института</param>
+	/// <remarks>Если необходимо обновить только одно поле из модели, то отправляем только это поле и GUID.</remarks>
+	/// <returns></returns>
+	[HttpPut]
+	public async Task<ActionResult> Update([FromBody] UpdateInstituteDto model)
+	{
+		var command = _mapper.Map<UpdateInstituteCommand>(model);
 
-        return NoContent();
-    }
+		var result = await Mediator.Send(command);
+		return Ok();
+	}
+
+	/// <summary>
+	/// Удаление института
+	/// </summary>
+	/// <param name="id">GUID института</param>
+	/// <returns></returns>
+	[Route("{id}")]
+	[HttpDelete]
+	public async Task<ActionResult> Delete(Guid id)
+	{
+		var command = new DeleteInstituteCommand()
+		{
+			Id = id
+		};
+
+		await Mediator.Send(command);
+
+		return Ok();
+	}
 }
