@@ -27,7 +27,7 @@ namespace SfeduSchedule.WebApi.Controllers
 		/// <returns></returns>
 		[Route("{id}")]
 		[HttpGet]
-		public async Task<ActionResult<GroupDetailsVm>> Get(Guid id)
+		public async Task<ActionResult<GroupDetailsVm>> Details(Guid id)
 		{
 			var query = new GetGroupDetailsQuery()
 			{

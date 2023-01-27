@@ -26,7 +26,7 @@ public class InstituteController : BaseController
 	/// </summary>
 	/// <returns></returns>
 	[HttpGet]
-	public async Task<ActionResult<InstituteListVm>> Get()
+	public async Task<ActionResult<InstituteListVm>> List()
 	{
 		var query = new GetInstituteListQuery();
 
