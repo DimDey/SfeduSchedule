@@ -7,18 +7,18 @@ using SfeduSchedule.Domain.Entities;
 
 namespace SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFaculties;
 
-public class GetInstituteFacultiesCommandHandler : IRequestHandler<GetInstituteFacultiesCommand, FacultyListVm>
+public class GetInstituteFacultiesQueryHandler : IRequestHandler<GetInstituteFacultiesQuery, FacultyListVm>
 {
 	private readonly IRepository<Faculty> _facultyRepository;
 	private readonly IMapper _mapper;
 
-	public GetInstituteFacultiesCommandHandler(IRepository<Faculty> repository, IMapper mapper)
+	public GetInstituteFacultiesQueryHandler(IRepository<Faculty> repository, IMapper mapper)
 	{
 		_facultyRepository = repository;
 		_mapper = mapper;
 	}
 
-	public async Task<FacultyListVm> Handle(GetInstituteFacultiesCommand request, CancellationToken cancellationToken)
+	public async Task<FacultyListVm> Handle(GetInstituteFacultiesQuery request, CancellationToken cancellationToken)
 	{
 		var facultyQuery = await _facultyRepository
 			.FindWhere(x => x.InstituteId == request.InstituteId)

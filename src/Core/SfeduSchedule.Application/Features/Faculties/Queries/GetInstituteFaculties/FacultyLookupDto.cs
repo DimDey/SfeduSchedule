@@ -7,8 +7,11 @@ namespace SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFacul
 public class FacultyLookupDto : IMapWith<Faculty>
 {
     public Guid Id { get; set; }
+    
     public string Name { get; set; }
+
     public Guid InstituteId { get; set; }
+
 
     public void Mapping(Profile profile)
     {

@@ -2,9 +2,9 @@ using FluentValidation;
 
 namespace SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFaculties;
 
-public class GetInstituteFacultiesCommandValidator : AbstractValidator<GetInstituteFacultiesCommand>
+public class GetInstituteFacultiesQueryValidator : AbstractValidator<GetInstituteFacultiesQuery>
 {
-    public GetInstituteFacultiesCommandValidator()
+    public GetInstituteFacultiesQueryValidator()
     {
         RuleFor(command =>
             command.InstituteId).NotEqual(Guid.Empty);

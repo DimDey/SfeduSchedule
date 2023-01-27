@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace SfeduSchedule.Application.Features.Groups.Queries.GetFacultyGroups;
+namespace SfeduSchedule.Application.Features.Faculties.Queries.GetFacultyGroups;
 
 public class GetFacultyGroupsQuery : IRequest<GroupsVm>
 {

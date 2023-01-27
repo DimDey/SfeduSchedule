@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SfeduSchedule.Application.Features.Faculties.Commands.CreateFaculty;
 using SfeduSchedule.Application.Features.Faculties.Commands.DeleteFaculty;
 using SfeduSchedule.Application.Features.Faculties.Commands.UpdateFaculty;
+using SfeduSchedule.Application.Features.Faculties.Queries.GetFacultyGroups;
 using SfeduSchedule.Application.Features.Faculties.Queries.GetInstituteFaculties;
 using SfeduSchedule.Application.Features.Institutes.Queries.GetInsituteList;
 
@@ -27,14 +28,32 @@ public class FacultyController : BaseController
 	/// <returns></returns>
 	[Route("{id}")]
 	[HttpGet]
-	public async Task<ActionResult<InstituteListVm>> Get(Guid id)
+	public async Task<ActionResult<InstituteListVm>> Details(Guid id)
 	{
-		var query = new GetInstituteFacultiesCommand()
+		var query = new GetInstituteFacultiesQuery()
 		{
 			InstituteId = id
 		};
 
 		var result = await Mediator.Send(query);
+
+		return Ok(result);
+	}
+
+	/// <summary>
+	/// Получение списка групп в факультете
+	/// </summary>
+	/// <param name="id">GUID факультета</param>
+	/// <returns></returns>
+	[HttpGet]
+	public async Task<ActionResult<GroupsVm>> Groups(Guid id)
+	{
+		var query = new GetFacultyGroupsQuery()
+		{
+			FacultyId = id
+		};
+
+		var result = await Mediator.Send<GroupsVm>(query);
 
 		return Ok(result);
 	}

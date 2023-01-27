@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using SfeduSchedule.Application.Interfaces.Repository.Base;
 using SfeduSchedule.Domain.Entities;
 
-namespace SfeduSchedule.Application.Features.Groups.Queries.GetFacultyGroups;
+namespace SfeduSchedule.Application.Features.Faculties.Queries.GetFacultyGroups;
 
 public class GetFacultyGroupsQueryHandler : IRequestHandler<GetFacultyGroupsQuery, GroupsVm>
 {
@@ -25,6 +25,5 @@ public class GetFacultyGroupsQueryHandler : IRequestHandler<GetFacultyGroupsQuer
 			.ToListAsync(cancellationToken);
 
 		return new GroupsVm { Groups = groupsQuery };
-
 	}
 }
