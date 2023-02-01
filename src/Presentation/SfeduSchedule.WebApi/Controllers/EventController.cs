@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SfeduSchedule.Application.Features.DayEvents.Commands.CreateEvent;
 using SfeduSchedule.Application.Features.DayEvents.Commands.DeleteEvent;
 using SfeduSchedule.Application.Features.DayEvents.Commands.UpdateEvent;
-using SfeduSchedule.Application.Features.DayEvents.Queries.GetEventDetails;
 using SfeduSchedule.WebApi.Models;
 
 namespace SfeduSchedule.WebApi.Controllers
@@ -18,23 +17,6 @@ namespace SfeduSchedule.WebApi.Controllers
 		public EventController(IMapper mapper)
 		{
 			_mapper = mapper;
-		}
-
-		/// <summary>
-		/// Получение детальной информации о ивенте
-		/// </summary>
-		/// <param name="id">GUID ивента</param>
-		/// <returns>Модель данных ивента</returns>
-		[HttpGet]
-		public async Task<ActionResult<EventDetailsVm>> Details(Guid id)
-		{
-			var query = new GetEventDetailsQuery
-			{
-				Id = id
-			};
-			var result = await Mediator.Send(query);
-
-			return Ok(result);
 		}
 
 		/// <summary>
@@ -72,6 +54,7 @@ namespace SfeduSchedule.WebApi.Controllers
 		/// </summary>
 		/// <param name="id">GUID ивента</param>
 		/// <returns></returns>
+		[Route("{id}")]
 		[HttpDelete]
 		public async Task<ActionResult> Delete(Guid id)
 		{
