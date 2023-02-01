@@ -28,7 +28,7 @@ public class FacultyController : BaseController
 	/// <returns></returns>
 	[Route("{id}")]
 	[HttpGet]
-	public async Task<ActionResult<InstituteListVm>> Details(Guid id)
+	public async Task<ActionResult<InstituteListVm>> List(Guid id)
 	{
 		var query = new GetInstituteFacultiesQuery()
 		{
@@ -45,6 +45,7 @@ public class FacultyController : BaseController
 	/// </summary>
 	/// <param name="id">GUID факультета</param>
 	/// <returns></returns>
+	[Route("{id}")]
 	[HttpGet]
 	public async Task<ActionResult<GroupsVm>> Groups(Guid id)
 	{
