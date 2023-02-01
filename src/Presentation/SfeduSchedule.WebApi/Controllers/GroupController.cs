@@ -27,6 +27,7 @@ namespace SfeduSchedule.WebApi.Controllers
 		/// <returns></returns>
 		[Route("{id}")]
 		[HttpGet]
+		[ResponseCache(CacheProfileName = "Default120")]
 		public async Task<ActionResult<GroupDetailsVm>> Details(Guid id)
 		{
 			var query = new GetGroupDetailsQuery()

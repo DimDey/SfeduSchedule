@@ -28,6 +28,7 @@ public class FacultyController : BaseController
 	/// <returns></returns>
 	[Route("{id}")]
 	[HttpGet]
+	[ResponseCache(CacheProfileName = "Default120")]
 	public async Task<ActionResult<InstituteListVm>> List(Guid id)
 	{
 		var query = new GetInstituteFacultiesQuery()
@@ -47,6 +48,7 @@ public class FacultyController : BaseController
 	/// <returns></returns>
 	[Route("{id}")]
 	[HttpGet]
+	[ResponseCache(CacheProfileName = "Default120")]
 	public async Task<ActionResult<GroupsVm>> Groups(Guid id)
 	{
 		var query = new GetFacultyGroupsQuery()
