@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Converters;
 using SfeduSchedule.Application;
 using SfeduSchedule.Application.Common.Mappings;
@@ -22,15 +23,24 @@ namespace SfeduSchedule.WebApi
 
 			services.AddPersistence(Configuration);
 			services.AddApplication();
-			services.AddAutoMapper(config =>
+			services.AddAutoMapper(options =>
 			{
-				config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-				config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
+				options.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+				options.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
 			});
 
-			services.AddControllers().AddNewtonsoftJson(opts =>
+			services.AddResponseCaching();
+			services.AddControllers(options => 
 			{
-				opts.SerializerSettings.Converters.Add(new StringEnumConverter());
+				options.CacheProfiles.Add("Default120", new CacheProfile
+				{
+					Duration = 120,
+					VaryByQueryKeys = new string[] { "id" },
+					Location = ResponseCacheLocation.Any
+				});
+			}).AddNewtonsoftJson(options =>
+			{
+				options.SerializerSettings.Converters.Add(new StringEnumConverter());
 			}); ;
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen(x =>
@@ -48,6 +58,7 @@ namespace SfeduSchedule.WebApi
 			app.UseMiddleware<ExpectionHandlerMiddleware>();
 			app.UseHttpsRedirection();
 			app.UseRouting();
+			app.UseResponseCaching();
 			app.UseAuthorization();
 			app.UseEndpoints(endpoints =>
 			{
