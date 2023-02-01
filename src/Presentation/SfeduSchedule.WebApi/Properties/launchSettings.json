@@ -7,7 +7,7 @@
 			"sslPort": 0
 		},
 		"iis": {
-			"applicationUrl": "http://schedule.dimdey.live"
+			"applicationUrl": "http://schedule.dimdey.test"
 		}
 	},
 	"profiles": {

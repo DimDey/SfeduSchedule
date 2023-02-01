@@ -21,9 +21,7 @@ namespace SfeduSchedule.Application.Features.DayEvents.Commands.CreateEvent
 		{
 			var entity = _mapper.Map<DayEvent>(request);
 			if (entity == null)
-			{
 				throw new ArgumentException(nameof(DayEvent));
-			}
 
 			await _events.UpdateAsync(entity, cancellationToken);
 
