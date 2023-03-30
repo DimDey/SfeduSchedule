@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using SfeduSchedule.Application.Common.Exceptions;
 using SfeduSchedule.Application.Interfaces.Repository.Base;
 using SfeduSchedule.Domain.Entities;
 

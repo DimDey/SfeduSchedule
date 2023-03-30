@@ -16,6 +16,9 @@ namespace SfeduSchedule.Persistence.EntityConfiguration
 			builder.Property(x => x.Begin)
 				.IsRequired();
 
+			builder.Property(x => x.End)
+				.IsRequired();
+
 			builder.Property(x => x.Description)
 				.HasMaxLength(20);
 

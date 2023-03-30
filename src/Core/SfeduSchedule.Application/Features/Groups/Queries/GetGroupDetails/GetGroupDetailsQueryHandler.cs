@@ -19,7 +19,11 @@ public class GetGroupDetailsQueryHandler : IRequestHandler<GetGroupDetailsQuery,
 	public async Task<GroupDetailsVm> Handle(GetGroupDetailsQuery request, CancellationToken cancellationToken)
 	{
 		var entity = await _groupRepository.GetByGuIdAsync(request.Id);
+		var model = _mapper.Map<GroupDetailsVm>(entity);
 
-		return _mapper.Map<GroupDetailsVm>(entity);
+		if (request.OnEven != null)
+			model.Events = model.Events.Where(x => x.OnEven == null || x.OnEven == request.OnEven).ToList();
+
+		return model;
 	}
 }

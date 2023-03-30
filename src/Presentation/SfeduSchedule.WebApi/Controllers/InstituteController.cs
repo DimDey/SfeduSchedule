@@ -26,7 +26,7 @@ public class InstituteController : BaseController
 	/// </summary>
 	/// <returns></returns>
 	[HttpGet]
-	[ResponseCache(CacheProfileName = "Default120")]
+	[ResponseCache(CacheProfileName = "Default10")]
 	public async Task<ActionResult<InstituteListVm>> List()
 	{
 		var query = new GetInstituteListQuery();

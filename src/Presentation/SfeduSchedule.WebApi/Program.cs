@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore;
-
 namespace SfeduSchedule.WebApi
 {
 	public class Program

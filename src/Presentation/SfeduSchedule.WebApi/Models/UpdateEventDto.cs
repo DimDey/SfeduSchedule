@@ -22,12 +22,12 @@ namespace SfeduSchedule.WebApi.Models
 		/// <summary>
 		/// Время начала
 		/// </summary>
-		public TimeOnly? Begin { get; set; }
+		public TimeSpan? Begin { get; set; }
 
 		/// <summary>
 		/// Время окончания
 		/// </summary>
-		public TimeOnly? End { get; set; }
+		public TimeSpan? End { get; set; }
 
 		/// <summary>
 		/// Описание ивента
