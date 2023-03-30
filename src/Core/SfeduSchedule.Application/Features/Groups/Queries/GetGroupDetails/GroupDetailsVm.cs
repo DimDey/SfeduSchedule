@@ -16,7 +16,7 @@ public class GroupDetailsVm : IMapWith<Group>
 
 	public void Mapping(Profile profile)
 	{
-
+		
 		profile.CreateMap<Group, GroupDetailsVm>();
 	}
 }

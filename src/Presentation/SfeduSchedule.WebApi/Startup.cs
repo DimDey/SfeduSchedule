@@ -27,7 +27,7 @@ namespace SfeduSchedule.WebApi
             {
                 options.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
                 options.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
-            });
+            }, typeof(Program));
 
             services.AddResponseCaching();
             services.AddControllers(options =>

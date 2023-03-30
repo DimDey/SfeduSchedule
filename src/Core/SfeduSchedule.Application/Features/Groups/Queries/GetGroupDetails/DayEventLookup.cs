@@ -10,9 +10,9 @@ namespace SfeduSchedule.Application.Features.Groups.Queries.GetGroupDetails
 
 		public DayNumber DayNumber { get; set; }
 
-		public TimeSpan Begin { get; set; }
+		public string Begin { get; set; }
 
-		public TimeSpan End { get; set; }
+		public string End { get; set; }
 
 		public string Description { get; set; }
 
