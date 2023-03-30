@@ -20,12 +20,12 @@ namespace SfeduSchedule.WebApi.Models
 		/// <summary>
 		/// Время начала пары
 		/// </summary>
-		public TimeOnly Begin { get; set; }
+		public TimeSpan Begin { get; set; }
 
 		/// <summary>
 		/// Время окончания пары
 		/// </summary>
-		public TimeOnly End { get; set; }
+		public TimeSpan End { get; set; }
 
 		/// <summary>
 		/// Описание пары

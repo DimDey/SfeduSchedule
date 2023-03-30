@@ -20,18 +20,20 @@ namespace SfeduSchedule.WebApi.Controllers
 			_mapper = mapper;
 		}
 
-		/// <summary>
-		/// Получение информации о группе
-		/// </summary>
-		/// <param name="id">GUID группы</param>
-		/// <returns></returns>
-		[Route("{id}")]
+        /// <summary>
+        /// Получение информации о группе
+        /// </summary>
+        /// <param name="id">GUID группы</param>
+        /// <param name="onEven">Четная/нечетная неделя</param>
+        /// <returns></returns>
+        [Route("{id}")]
 		[HttpGet]
-		public async Task<ActionResult<GroupDetailsVm>> Details(Guid id)
+		public async Task<ActionResult<GroupDetailsVm>> Details(Guid id, bool? onEven)
 		{
 			var query = new GetGroupDetailsQuery()
 			{
-				Id = id
+				Id = id,
+				OnEven = onEven
 			};
 
 			var result = await Mediator.Send(query);

@@ -16,9 +16,9 @@
 
 		public DayNumber DayNumber { get; set; }
 
-		public TimeOnly Begin { get; set; }
+		public TimeSpan Begin { get; set; }
 		
-		public TimeOnly End { get; set; }
+		public TimeSpan End { get; set; }
 
 		public string Description { get; set; }
 

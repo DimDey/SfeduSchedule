@@ -2,7 +2,6 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SfeduSchedule.Application.Interfaces.Repository;
 using SfeduSchedule.Application.Interfaces.Repository.Base;
 using SfeduSchedule.Domain.Entities;
 
