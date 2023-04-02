@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  schedule.web:
+    image: docker.io/dimdey/sfeduschedule
+    ports:
+       - 5000:80
+    restart: always
+    pull_policy: always
