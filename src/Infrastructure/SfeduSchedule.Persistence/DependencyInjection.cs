@@ -13,8 +13,8 @@ namespace SfeduSchedule.Persistence
 			var connectionString = configuration["DbConnection"];
 			services.AddDbContext<ApplicationContext>(options =>
 			{
-				//options.UseNpgsql(connectionString);
-				options.UseSqlServer(connectionString);
+				options.UseNpgsql(connectionString);
+				//options.UseSqlServer(connectionString);
 			});
 			services.AddScoped<IApplicationContext>(provider =>
 				provider.GetService<ApplicationContext>());
