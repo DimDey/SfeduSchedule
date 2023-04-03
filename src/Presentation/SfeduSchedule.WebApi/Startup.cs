@@ -38,10 +38,7 @@ namespace SfeduSchedule.WebApi
                     VaryByQueryKeys = new string[] { "id" },
                     Location = ResponseCacheLocation.Any
                 });
-            }).AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.Converters.Add(new StringEnumConverter());
-            }); ;
+            }).AddNewtonsoftJson();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(x =>
             {
